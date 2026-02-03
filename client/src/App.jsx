@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 
-// --- Upload Component ---
+
 function UploadPage() {
   const [text, setText] = useState('');
   const [file, setFile] = useState(null);
@@ -34,7 +34,7 @@ function UploadPage() {
   );
 }
 
-// --- View/Download Component ---
+
 function ViewPage() {
   const { id } = useParams();
   const [data, setData] = useState(null);

@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Initialize SQLite Database 
+
 const db = new sqlite3.Database('./vault.db');
 
 db.serialize(() => {
@@ -24,10 +24,10 @@ db.serialize(() => {
     )`);
 });
 
-// Setup File Storage 
+
 const upload = multer({ dest: 'uploads/' });
 
-// POST: Upload Text or File [cite: 16, 18, 19, 21, 22]
+
 app.post('/api/upload', upload.single('file'), (req, res) => {
     const { text, expiryMinutes } = req.body;
     const id = nanoid(10);
@@ -45,7 +45,7 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
     });
 });
 
-// GET: Retrieve Content [cite: 25, 26, 28, 35, 37, 40]
+
 app.get('/api/content/:id', (req, res) => {
     db.get(`SELECT * FROM vault WHERE id = ?`, [req.params.id], (err, row) => {
         if (!row || Date.now() > row.expires_at) {
@@ -55,7 +55,7 @@ app.get('/api/content/:id', (req, res) => {
     });
 });
 
-// GET: Download File [cite: 41]
+
 app.get('/api/download/:id', (req, res) => {
     db.get(`SELECT * FROM vault WHERE id = ?`, [req.params.id], (err, row) => {
         if (row && row.file_path) res.download(row.file_path, row.file_name);

@@ -18,3 +18,5 @@
 3. Link is returned to the user.
 4. On retrieval, server checks current time against `expires_at`.
 5. If expired, server returns a 403 response.
+
+![Architecture Diagram](./architecture-diagram.png)
